@@ -3,20 +3,22 @@ DRAWIO_SRC ?= $(CURDIR)/../src/diagram.drawio
 DRAWIO_BIN ?= drawio
 LAYER0_BIN ?= drawio-layer
 
-gui:
-	$(DRAWIO_BIN) $(DRAWIO_SRC)
+TEMP_XML    = temp.xml
+FILE_PNG    = $(shell seq -f "cpu_%02g.png" 0 22)
+FILE_PNG   += $(shell seq -f "cu_%02g.png" 0 25)
+FILE_GIF    = schoolRISCV.gif
 
-TEMP_XML = temp.xml
-FILE_PNG = $(shell seq -f "cpu_%02g.png" 0 22)
-FILE_PNG += $(shell seq -f "cu_%02g.png" 0 25)
-FILE_GIF = schoolRISCV.gif
+all: png gif
 
-all: $(FILE_PNG) \
-	 $(FILE_GIF) \
-	 program_flow.png
+png: $(FILE_PNG)  program_flow.png
+
+gif: $(FILE_GIF)
 
 clean:
 	rm -f *.png *.gif *.xml
+
+gui:
+	$(DRAWIO_BIN) $(DRAWIO_SRC)
 
 ####################################################
 # gif from png
