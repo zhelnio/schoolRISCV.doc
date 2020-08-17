@@ -34,3 +34,5 @@ out/slides_ru.pdf: marp images out
 out/schoolRISCV.gif: images out
 	cp png/schoolRISCV.gif $@
 
+html:
+	npx marp slides_ru.md --allow-local-files --output slides.html
