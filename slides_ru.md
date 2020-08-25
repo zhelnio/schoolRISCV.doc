@@ -61,6 +61,16 @@ Stanislav Zhelnio, 2020
 
 ---
 
+## Последовательность проектирования
+
+- тракт данных
+  Data Path
+
+- устройство управления
+  Control Unit
+
+---
+
 ## Спецификация RISC-V
 
 ![h:500 center](img/riscv_spec.png)
@@ -69,13 +79,15 @@ https://riscv.org/specifications/
 
 ---
 
-## Последовательность проектирования
+## Наборы команд RISC-V: спецификация
 
-- тракт данных
-  Data Path
+![h:500 center](img/riscv_is.png)
 
-- устройство управления
-  Control Unit
+---
+
+## Архитектурное состояние: спецификация
+
+![w:1080 center](img/riscv_pm.png)
 
 ---
 
