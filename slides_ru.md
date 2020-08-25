@@ -274,8 +274,7 @@ https://riscv.org/specifications/
 
 ```Verilog
 // sm_register.v
-module sm_register
-(
+module sm_register (
     input                 clk,
     input                 rst,
     input      [ 31 : 0 ] d,
@@ -295,6 +294,7 @@ endmodule
     wire [31:0] pcNext   = pcSrc ? pcBranch : pcPlus4;
     sm_register r_pc(clk ,rst_n, pcNext, pc);
 ```
+https://github.com/zhelnio/schoolRISCV/tree/00_simple/src
 
 ---
 
