@@ -30,6 +30,10 @@ out:
 out/slides_ru.pdf: marp images out
 	npx marp slides_ru.md --allow-local-files --pdf --output $@
 
+# export pptx
+out/slides_ru.pptx: marp images out
+	npx marp slides_ru.md --allow-local-files --pdf --output $@
+
 # export gif
 out/schoolRISCV.gif: images out
 	cp png/schoolRISCV.gif $@
