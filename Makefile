@@ -27,17 +27,16 @@ images: venv
 out:
 	mkdir -p out
 
-# create marp slides from markdown and images
-out/slides_ru.pdf: marp images out
-	npx marp slides_ru.md --allow-local-files --pdf --output $@
+# export pptx & pdf
+out/slides_ru.pdf: slides_ru.md #marp images out
+	npx marp $< --allow-local-files --output $@
 
-# export pptx
-out/slides_ru.pptx: marp images out
-	npx marp slides_ru.md --allow-local-files --pdf --output $@
+out/slides_ru.pptx: slides_ru.md #marp images out
+	npx marp $< --allow-local-files --output $@
 
 # export gif
 out/schoolRISCV.gif: images out
 	cp png/schoolRISCV.gif $@
 
 html:
-	npx marp slides_ru.md --allow-local-files --output slides.html
+	npx marp $<  --allow-local-files --output slides.html
