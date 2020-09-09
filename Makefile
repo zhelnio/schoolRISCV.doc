@@ -1,6 +1,7 @@
 
 
 all: out/slides_ru.pdf \
+	 out/slides_ru.pptx \
 	 out/schoolRISCV.gif
 
 clean:
