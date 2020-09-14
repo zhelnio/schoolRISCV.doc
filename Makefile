@@ -1,8 +1,6 @@
 
 
-all: out/slides_ru.pdf \
-	 out/slides_ru.pptx \
-	 out/schoolRISCV.gif
+all: images slides
 
 clean:
 	rm -rf venv
@@ -16,27 +14,25 @@ venv:
 	pip install pip --upgrade; \
 	pip install git+https://github.com/zhelnio/drawio-layer#egg=drawio-layer
 
-# nodejs marp-cli install
-marp:
-	npm install --save-dev @marp-team/marp-cli
-
 # generate images from drawio diagram
 images: venv
 	. venv/bin/activate; $(MAKE) -C png all
 
-out:
-	mkdir -p out
+OUT_DIR=out
 
-# export pptx & pdf
-out/slides_ru.pdf: slides_ru.md #marp images out
-	npx marp $< --allow-local-files --output $@
+$(OUT_DIR):
+	mkdir -p $(OUT_DIR)
 
-out/slides_ru.pptx: slides_ru.md #marp images out
-	npx marp $< --allow-local-files --output $@
+ifeq (,$(shell which marp))
+  MARP=npx @marp-team/marp-cli
+else
+  MARP=marp
+endif
 
-# export gif
-out/schoolRISCV.gif: images out
-	cp png/schoolRISCV.gif $@
+slides: slides_ru.md $(OUT_DIR)
+	$(MARP) $< --allow-local-files --output $(OUT_DIR)/slides_ru.pdf
+	$(MARP) $< --allow-local-files --output $(OUT_DIR)/slides_ru.pptx
+	cp png/schoolRISCV.gif $(OUT_DIR)
 
 html:
 	npx marp $<  --allow-local-files --output slides.html
