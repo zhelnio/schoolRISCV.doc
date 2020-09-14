@@ -29,9 +29,10 @@ else
   MARP=marp
 endif
 
-slides: slides_ru.md $(OUT_DIR)
-	$(MARP) $< --allow-local-files --output $(OUT_DIR)/slides_ru.pdf
-	$(MARP) $< --allow-local-files --output $(OUT_DIR)/slides_ru.pptx
+slides: slides_ru.md steps_ru.md $(OUT_DIR)
+	$(MARP) steps_ru.md  --allow-local-files --output $(OUT_DIR)/steps_ru.pdf
+	$(MARP) slides_ru.md --allow-local-files --output $(OUT_DIR)/slides_ru.pdf
+	$(MARP) slides_ru.md --allow-local-files --output $(OUT_DIR)/slides_ru.pptx
 	cp png/schoolRISCV.gif $(OUT_DIR)
 
 html:
