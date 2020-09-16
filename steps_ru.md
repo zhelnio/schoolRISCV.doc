@@ -10,7 +10,7 @@ img[alt~="center"] {
 }
 </style>
 
-# SchoolRISCV. Добавление инструкции
+# SchoolRISCV. Пример добавления инструкции
 
 https://github.com/zhelnio/schoolRISCV
 
@@ -39,30 +39,32 @@ Stanislav Zhelnio, 2020
 
 ## SLLI: тестовая программа
 
-```bash
-cp -r program/00_counter program/03_slli
-make rars
-```
+* скопировать каталог **program/00_counter** с новым именем
 
-```Assembly
-# program/03_slli/main.S
-#
-# RISC-V new instruction (slli) software test
-#
-            .text
+    ```bash
+    cp -r program/00_counter program/03_slli
+    ```
 
-start:      addi a0, zero, 1         # a0 = 1
-shift:      slli a0, a0, 1           # a0 = a0 << 1
-            beq a0, zero, start      # if a0 == 0 then start
-            beq zero, zero, shift    #            else shift
-```
+* откорректировать программу **main.S**
+
+    ```Assembly
+    # program/03_slli/main.S
+    #
+    # RISC-V new instruction (slli) software test
+    #
+                .text
+    start:      addi a0, zero, 1         # a0 = 1
+    shift:      slli a0, a0, 1           # a0 = a0 << 1
+                beq a0, zero, start      # if a0 == 0 then start
+                beq zero, zero, shift    #            else shift
+    ```
 
 ---
 
 ## SLLI: Проверка тестовой программы
 
+в каталоге **program/03_slli**
 ```bash
-cd program/03_slli
 make rars
 ```
 
@@ -141,47 +143,45 @@ endmodule
 
 ## Проверка в симуляторе
 
+в каталоге **program/03_slli**
 ```bash
-cd program/03_slli
 make build
 make modelsim
 ```
 
 ```text
-    3  pc = 00000000 instr = 00100513   v0 = 1   addi  $10, $0, 0x00000001
-    4  pc = 00000000 instr = 00100513   v0 = 1   addi  $10, $0, 0x00000001
-    5  pc = 00000004 instr = 00151513   v0 = 1   new/unknown
-    6  pc = 00000008 instr = fe050ce3   v0 = 2   beq   $10, $0, 0xfffffff8 (-8)
-    7  pc = 0000000c instr = fe000ce3   v0 = 2   beq   $0, $0, 0xfffffff8 (-8)
-    8  pc = 00000004 instr = 00151513   v0 = 2   new/unknown
-    9  pc = 00000008 instr = fe050ce3   v0 = 4   beq   $10, $0, 0xfffffff8 (-8)
-   10  pc = 0000000c instr = fe000ce3   v0 = 4   beq   $0, $0, 0xfffffff8 (-8)
-   11  pc = 00000004 instr = 00151513   v0 = 4   new/unknown
-   12  pc = 00000008 instr = fe050ce3   v0 = 8   beq   $10, $0, 0xfffffff8 (-8)
-   13  pc = 0000000c instr = fe000ce3   v0 = 8   beq   $0, $0, 0xfffffff8 (-8)
-   14  pc = 00000004 instr = 00151513   v0 = 8   new/unknown
+ 3  pc = 00000000 instr = 00100513   v0 = 1   addi  $10, $0, 0x00000001
+ 4  pc = 00000000 instr = 00100513   v0 = 1   addi  $10, $0, 0x00000001
+ 5  pc = 00000004 instr = 00151513   v0 = 1   new/unknown
+ 6  pc = 00000008 instr = fe050ce3   v0 = 2   beq   $10, $0, 0xfffffff8 (-8)
+ 7  pc = 0000000c instr = fe000ce3   v0 = 2   beq   $0, $0, 0xfffffff8 (-8)
+ 8  pc = 00000004 instr = 00151513   v0 = 2   new/unknown
+ 9  pc = 00000008 instr = fe050ce3   v0 = 4   beq   $10, $0, 0xfffffff8 (-8)
+10  pc = 0000000c instr = fe000ce3   v0 = 4   beq   $0, $0, 0xfffffff8 (-8)
+11  pc = 00000004 instr = 00151513   v0 = 4   new/unknown
+12  pc = 00000008 instr = fe050ce3   v0 = 8   beq   $10, $0, 0xfffffff8 (-8)
+13  pc = 0000000c instr = fe000ce3   v0 = 8   beq   $0, $0, 0xfffffff8 (-8)
+14  pc = 00000004 instr = 00151513   v0 = 8   new/unknown
 ```
 
 ---
 
 ## Синтез проекта
 
-- копирование дампа памяти программ
+- копирование дампа памяти программб в каталоге **program/03_slli**
 
     ```bash
-    cd program/03_slli
     make board
     ```
 
-- сборка проекта в Quartus
+- сборка проекта в Quartus, в каталоге **board/de10_lite**
 
     ```bash
-    cd ../../board/de10_lite
     make create
     make build
     ```
 
-- просмотр отчета о сборке
+- просмотр отчета о сборке, в каталоге **board/de10_lite**
 
     ```bash
     make open
@@ -199,7 +199,7 @@ make modelsim
 
 ## Проверка на отладочной плате
 
-- выполнить прошивку платы
+- выполнить прошивку платы, в каталоге **board/de10_lite**
 
     ```bash
     make load
